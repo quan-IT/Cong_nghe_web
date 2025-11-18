@@ -19,7 +19,48 @@ Tại sao khi tôi refresh lại trang (F5), trình duyệt vẫn phải gửi t
 # CHƯƠNG 2: LẬP TRÌNH PHP CĂN BẢN
 
 A. Code đã hoàn thiện: 
-[example.php](chater2.php)
+```php
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>PHT Chương 2 - PHP Căn Bản</title>
+</head>
+<body>
+    <h1>Kết quả PHP Căn Bản</h1>
+
+<?php
+// Khai báo biến
+$ho_ten = "Nguyễn Văn A";
+$diem_tb = 7.5;
+$co_di_hoc_chuyen_can = true;
+
+// In ra thông tin sinh viên
+echo "Họ tên: $ho_ten<br>";
+echo "Điểm: $diem_tb<br>";
+
+// Xếp loại theo điểm và chuyên cần
+if ($diem_tb >= 8.5 && $co_di_hoc_chuyen_can) {
+    echo "Xếp loại: Giỏi<br>";
+} elseif ($diem_tb >= 6.5 && $co_di_hoc_chuyen_can) {
+    echo "Xếp loại: Khá<br>";
+} elseif ($diem_tb >= 5.0 && $co_di_hoc_chuyen_can) {
+    echo "Xếp loại: Trung bình<br>";
+} else {
+    echo "Xếp loại: Yếu (Cần cố gắng thêm!)<br>";
+}
+
+// Hàm chào mừng
+function chaoMung() {
+    echo "Chúc mừng bạn đã hoàn thành PHT Chương 2!";
+}
+
+// Gọi hàm
+chaoMung();
+?>
+</body>
+</html>
+
 
 ![alt text](1.png)
 Câu hỏi Phản biện:
