@@ -74,7 +74,7 @@ A. Code đã hoàn thiện:
 </body>
 
 </html>
-
+```
 B. Ảnh chụp màn hình Kết quả (Trình duyệt Web):
 
 ![alt text](1.png)
