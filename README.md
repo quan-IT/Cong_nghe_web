@@ -77,6 +77,8 @@ A. Code đã hoàn thiện:
 
 
 ![alt text](1.png)
+
+
 Câu hỏi Phản biện:
 Trong PHP, bạn có thể tạo và sử dụng hàm (function) mà không cần lớp và đối tượng. Vậy lợi ích chính
 của việc sử dụng Lớp và Đối tượng (OOP) trong PHP là gì?Trong tình huống nào OOP giúp code PHP trở
