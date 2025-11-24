@@ -35,8 +35,8 @@ A. Code đã hoàn thiện:
     // =============================
     // TODO 1: Khai báo 3 biến
     // =============================
-    $ho_ten = "Nguyễn Văn A";
-    $diem_tb = 7.5;
+    $ho_ten = "Nguyễn Hữu Quân";
+    $diem_tb = 8.5;
     $co_di_hoc_chuyen_can = true;
 
     // =============================
