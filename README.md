@@ -185,4 +185,4 @@ B. Ảnh chụp màn hình Kết quả (Trình duyệt Web):
 
 ![alt text](phieu3/0.png)
 Câu hỏi Phản biện:
-
+Tại sao hàm session_start() phải được gọi ở cả file handle_login.php và file welcome.php để quản lý trạng thái đăng nhập của người dùng?
