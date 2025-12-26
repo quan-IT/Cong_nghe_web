@@ -1,12 +1,15 @@
 # Cong_nghe_web
+
 Bài tập web
 
-#                                             PHIẾU HỌC TẬP CHỦ ĐỘNG (PHT)
-#                                          Môn học: CSE485: Công nghệ Web
+# PHIẾU HỌC TẬP CHỦ ĐỘNG (PHT)
+
+# Môn học: CSE485: Công nghệ Web
+
 # CHƯƠNG 1: TÌM HIỂU VỀ CÔNG NGHỆ WEB 4
 
 A. Ảnh chụp màn hình Kết quả (Trình duyệt Web):
-![alt text](0.png)
+![alt text](phieu1/0.png)
 B. Thông tin trích xuất:
 
 1. Request URL: https://tlu.edu.vn/
@@ -18,7 +21,8 @@ Tại sao khi tôi refresh lại trang (F5), trình duyệt vẫn phải gửi t
 
 # CHƯƠNG 2: LẬP TRÌNH PHP CĂN BẢN
 
-A. Code đã hoàn thiện: 
+A. Code đã hoàn thiện:
+
 ```php
 <!DOCTYPE html>
 <html lang="vi">
@@ -75,10 +79,10 @@ A. Code đã hoàn thiện:
 
 </html>
 ```
+
 B. Ảnh chụp màn hình Kết quả (Trình duyệt Web):
 
-![alt text](1.png)
-
+![alt text](phieu2/1.png)
 
 Câu hỏi Phản biện:
 Trong PHP, bạn có thể tạo và sử dụng hàm (function) mà không cần lớp và đối tượng. Vậy lợi ích chính
@@ -86,8 +90,10 @@ của việc sử dụng Lớp và Đối tượng (OOP) trong PHP là gì?Trong
 nên dễ quản lý và tái sử dụng hơn so với chỉ dùng hàm thuần túy?
 
 # CHƯƠNG 3: TRANG WEB ĐỘNG
+
 A. Code đã hoàn thiện:
 handle_login.php
+
 ```php
 <?php
 // TODO 1: (Cực kỳ quan trọng) Khởi động session
@@ -144,8 +150,9 @@ exit;
 ?>
 ```
 
- welcome.php
- ```php
+welcome.php
+
+```php
 <?php
 // TODO 1: Khởi động session (BẮT BUỘC ở mọi trang cần dùng SESSION)
 // Gợi ý: Dùng hàm session_...()
@@ -157,38 +164,41 @@ session_start();
 
 if (isset($_SESSION['username'])) {
 
-    // TODO 3: Nếu tồn tại, lấy username từ SESSION ra
+   // TODO 3: Nếu tồn tại, lấy username từ SESSION ra
 
-    $loggedInUser = $_SESSION['username'];
+   $loggedInUser = $_SESSION['username'];
 
-    // TODO 4: In ra lời chào mừng
+   // TODO 4: In ra lời chào mừng
 
-    echo "<h1>Chào mừng trở lại, $loggedInUser!</h1>";
-    echo "<p>Bạn đã đăng nhập thành công.</p>";
+   echo "<h1>Chào mừng trở lại, $loggedInUser!</h1>";
+   echo "<p>Bạn đã đăng nhập thành công.</p>";
 
-    // TODO 5: (Tạm thời) Tạo 1 link để "Đăng xuất" (chỉ là quay về login.html)
+   // TODO 5: (Tạm thời) Tạo 1 link để "Đăng xuất" (chỉ là quay về login.html)
 
-    echo '<a href="login.html">Đăng xuất (Tạm thời)</a>';
+   echo '<a href="login.html">Đăng xuất (Tạm thời)</a>';
 } else {
-    // TODO 6: Nếu không tồn tại SESSION (chưa đăng nhập)
+   // TODO 6: Nếu không tồn tại SESSION (chưa đăng nhập)
 
-    header('Location: login.html');
+   header('Location: login.html');
 
-    // Chuyển hướng người dùng về trang login.html
-    // Gợi ý: Dùng header('Location: ...');
+   // Chuyển hướng người dùng về trang login.html
+   // Gợi ý: Dùng header('Location: ...');
 
-    exit;
+   exit;
 }
 ?>
 ```
-B. Ảnh chụp màn hình Kết quả (Trình duyệt Web): 
+
+B. Ảnh chụp màn hình Kết quả (Trình duyệt Web):
 
 ![alt text](phieu3/0.png)
 Câu hỏi Phản biện:
 Tại sao hàm session_start() phải được gọi ở cả file handle_login.php và file welcome.php để quản lý trạng thái đăng nhập của người dùng?
 
 # CHƯƠNG 4: WEBSITE HƯỚNG DỮ LIỆU
+
 A. Code đã hoàn thiện:
+
 ```php
 <?php
 // === THIẾT LẬP KẾT NỐI PDO ===
@@ -293,9 +303,418 @@ $stmt_select = $pdo->query($sql_select);
 
 </html>
 ```
+
 B. Ảnh chụp màn hình Kết quả:
+
 1. Ảnh 1 (phpMyAdmin):
-![alt text](2.png)
+   ![alt text](phieu4/2.png)
 2. Ảnh 2 (Trình duyệt Web):
-![alt text](3.png)
+   ![alt text](phieu4/3.png)
+   Câu hỏi Phản biện:
+
+# CHƯƠNG 5: MỞ RỘNG ỨNG DỤNG (TẬP TRUNG VÀO 5.1 TÁI CẤU TRÚC & 5.5 MÔ HÌNH MVC)
+
+A. Code đã hoàn thiện: Dán (paste) toàn bộ code của cả 3 tệp bạn đã sửa:
+
+1. models/SinhVienModel.php
+
+```php
+<?php
+// Tệp Model sẽ chứa tất cả logic truy vấn CSDL
+// TODO 1: Viết 1 hàm tên là getAllSinhVien()
+// Hàm này nhận 1 tham số là $pdo (đối tượng PDO)
+// Bên trong hàm, thực thi câu lệnh SELECT * FROM sinhvien
+// Hàm trả về kết quả (dùng fetchAll)
+function getAllSinhVien($pdo)
+{
+    // Gợi ý:
+    // $sql = "SELECT * FROM sinhvien";
+
+    $sql = "SELECT * FROM sinhvien ORDER BY ngay_tao DESC";
+
+    // $stmt = $pdo->query($sql);
+
+    $stmt = $pdo->query($sql);
+
+    // return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// TODO 2: Viết 1 hàm tên là addSinhVien()
+// Hàm này nhận 3 tham số: $pdo, $ten, $email
+// Bên trong hàm, thực thi câu lệnh INSERT (dùng Prepared Statement)// Gợi ý:
+// $sql = "INSERT INTO sinhvien (ten_sinh_vien, email) VALUES (?, ?)";
+// $stmt = $pdo->prepare($sql);
+// $stmt->execute([$ten, $email]);
+
+function addSinhVien($pdo, $ten, $email)
+{
+    $sql = "INSERT INTO sinhvien (ten_sinh_vien, email) VALUES ($ten, $email)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$ten, $email]);
+}
+?>
+```
+
+2. views/sinhvien_view.php
+
+```php
+<?php
+// Tệp View CHỈ chứa HTML và logic hiển thị (echo, foreach)
+// Tệp View KHÔNG chứa câu lệnh SQL
+?>
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHT Chương 5 - MVC</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Thêm Sinh Viên Mới (Kiến trúc MVC)</h2>
+    <form action="index.php" method="POST">
+        Tên sinh viên: <input type="text" name="ten_sinh_vien" required>
+        Email: <input type="email" name="email" required><button type="submit">Thêm</button>
+    </form>
+    <h2>Danh Sách Sinh Viên (Kiến trúc MVC)</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tên Sinh Viên</th>
+            <th>Email</th>
+            <th>Ngày Tạo</th>
+        </tr><?php
+                // TODO 4: Dùng vòng lặp foreach để duyệt qua biến $danh_sach_sv
+                // (Biến $danh_sach_sv này sẽ được Controller truyền sang)
+                // Gợi ý: foreach ($danh_sach_sv as $sv) { ... }
+                foreach ($danh_sach_sv as $sv) {
+                    // TODO 5: In (echo) các dòng <tr> và <td> chứa dữ liệu $sv
+                    // Gợi ý: echo "<tr><td>" . htmlspecialchars($sv['id']) .
+
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($sv['id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($sv['ten_sinh_vien']) . "</td>";
+                    echo "<td>" . htmlspecialchars($sv['email']) . "</td>";
+                    echo "<td>" . htmlspecialchars($sv['ngay_tao']) . "</td>";
+                    echo "</tr>";
+                    // Đóng vòng lặp
+                }
+                ?>
+    </table>
+</body>
+
+</html>
+?>
+```
+
+3. index.php
+
+```php
+<?php
+// Tệp Controller là "não" của ứng dụng
+// TODO 6: (Quan trọng) Import (require_once) tệp Model vào
+// Gợi ý: require_once 'models/SinhVienModel.php';
+
+require_once 'models/SinhVienModel.php"';
+
+// === THIẾT LẬP KẾT NỐI PDO ===
+// TODO 7: Copy code PDO từ PHT Chương 4 vào đây
+$host = '127.0.0.1';
+$dbname = 'cse485_web';
+$username = 'root';
+$password = '';
+$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Kết nối thất bại: " . $e->getMessage());
+}
+// === KẾT THÚC KẾT NỐI PDO ===
+// === LOGIC CỦA CONTROLLER ===
+// TODO 8: Kiểm tra  xem có hành động POST (thêm sinh viên) không
+// Gợi ý: Dùng isset($_POST['ten_sinh_vien'])
+if (isset($_POST['ten_sinh_vien'])) {
+    // TODO 9: Nếu có, lấy $ten và $email từ $_POST
+    $ten = $_POST['ten_sinh_vien'];
+    $email = $_POST['email'];
+    // TODO 10: Gọi hàm addSinhVien() từ Model
+    // (Truyền $pdo, $ten, $email vào hàm)
+    // Gợi ý: addSinhVien($pdo, $ten, $email);
+    addSinhVien($pdo, $ten, $email);
+    // TODO 11: Chuyển hướng về index.php để "làm mới" trang
+    // Gợi ý: header('Location: index.php');
+    header('Location: index.php');
+    exit;
+}
+// TODO 12: (Luôn luôn) Gọi hàm getAllSinhVien() từ Model
+// (Truyền $pdo vào hàm)
+// Lưu kết quả trả về vào một biến, ví dụ: $danh_sach_sv
+// Gợi ý: $danh_sach_sv = getAllSinhVien($pdo);
+$danh_sach_sv = getAllSinhVien($pdo);
+
+
+// TODO 13: (Rất quan trọng) Import (include) tệp View ở cuối cùng
+// Tệp View sẽ tự động "nhìn thấy" biến $danh_sach_sv mà ta vừa tạo
+// Gợi ý: include 'views/sinhvien_view.php';
+
+include 'views/sinhvien_view.php';
+?>
+```
+
+B. Ảnh chụp màn hình Kết quả (Trình duyệt Web):
+![alt text](phieu5/0.png)
 Câu hỏi Phản biện:
+Khi mình thêm dữ liệu thì mình include lại views/sinhvien_view.php thì dữ liệu có bị xếp trồng lên không?
+
+# CHƯƠNG 6: GIỚI THIỆU VỀ LARAVEL
+
+A. Code đã hoàn thiện:
+
+1. Dán (paste) toàn bộ code của tệp app/Http/Controllers/PageController.php.
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PageController extends Controller
+{
+    // TODO 8: Thêm phương thức này
+    public function showHomepage()
+    {
+        // TODO 9: Thay vì echo, chúng ta 'return'
+        return "Chào mừng bạn đến với PHT Chương 6 - Laravel!";
+    }
+}
+?>
+```
+
+2. Dán (paste) toàn bộ code của tệp routes/web.php.
+
+```php
+<?php
+
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+
+// TODO 12: Xóa Route Route::get('/', ...); mặc định. Thay vào đó, thêm 2
+// Route mới:
+// o Một Route cho URL / (trang chủ).
+// o Một Route cho URL /about.
+// o Cả hai đều trỏ đến PageController@showHomepage (chúng ta sẽ dùng
+// chung 1 hàm cho PHT này).
+
+// TODO 12: Thêm 2 route này
+Route::get('/', [PageController::class, 'showHomepage']);
+Route::get('/about', [PageController::class, 'showHomepage']);
+?>
+```
+
+B. Ảnh chụp màn hình Kết quả (3 ẢNH):
+
+1. Ảnh 1 (Terminal): Chụp màn hình Terminal sau khi chạy lệnh php artisan
+   make:controller PageController thành công.
+   ![alt text](phieu6/6_1.png)
+2. Ảnh 2 (Terminal): Chụp màn hình Terminal đang chạy lệnh php artisan serve.
+   ![alt text](phieu6/6_2.png)
+3. Ảnh 3 (Trình duyệt Web): Chụp ảnh màn hình trình duyệt truy cập vào
+   http://127.0.0.1:8000/ (phải thấy thông điệp chào mừng bạn đã return ở TODO 9).
+   ![alt text](phieu6/6_3.png)
+
+Câu hỏi Phản biện:
+
+# CHƯƠNG 7: TẠO KHUÔN MẪU VỚI BLADE
+
+A. Code đã hoàn thiện: Dán (paste) toàn bộ code của 3 tệp bạn đã tạo/sửa:
+
+4. resources/views/layouts/app.blade.php
+
+```php
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'Website Của Tôi' }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align:
+                center;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trang Web CSE485 - Chương 7</h1>
+    </header>
+    <nav>
+        <a href="/">Trang Chủ</a>
+        <a href="/about">Giới Thiệu</a>
+    </nav>
+    <div class="container">
+        @yield('content')
+    </div>
+    <footer>
+        <p>&copy; 2025 - Khoa CNTT - Trường Đại học Thủy Lợi</p>
+    </footer>
+</body>
+
+</html>
+```
+
+5. resources/views/homepage.blade.php
+
+```php
+@extends('layouts.app')
+@section('content')
+<h2>{{ $page_title }}</h2>
+<p>{{ $page_description }}</p>
+<h3>Danh sách công việc (Lấy từ Controller):</h3>
+<ul>
+    @foreach($tasks as $task)
+    <li>{{ $task }}</li>
+    @endforeach
+</ul>
+@endsection
+```
+
+6. app/Http/Controllers/PageController.php
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PageController extends Controller
+{
+    // Sửa phương thức showHomepage() của Chương 6
+    public function showHomepage()
+    {
+        // TODO 7: Thay vì "return 'Chào mừng...'", chúng ta sẽ
+        // chuẩn bị dữ liệu để truyền cho View
+        $viewTitle = 'PHT Chương 7 - Blade Template';
+        $pageTitle = 'Chào mừng bạn đến với Blade!';
+        $pageDescription = 'Đây là trang chủ được render bằng Blade Template
+Engine.';
+        $tasks = [
+            'Cài đặt Laravel',
+            'Hiểu về Routing & Controller',
+            'Tạo Layout với Blade',
+            'Truyền dữ liệu cho View'
+        ];
+        // TODO 8: Trả về một View
+        // Gợi ý: Dùng hàm view('ten_view', $data_array)
+        // 'homepage' tương đương 'homepage.blade.php'
+        return view('homepage', [
+            'title' => $viewTitle,
+            'page_title' => $pageTitle,
+            'page_description' => $pageDescription,
+            'tasks' => $tasks
+        ]);
+        // TODO 9: (Cách khác) Dùng hàm compact() cho gọn
+        // return view('homepage', compact('viewTitle', 'pageTitle','pageDescription', 'tasks'));
+        // (Lưu ý: khi dùng compact, tên biến ở Controller và View phải khớp nhau)
+    }
+}
+?>
+```
+
+B. Ảnh chụp màn hình Kết quả (Trình duyệt Web): Chạy php artisan serve và truy cập
+http://127.0.0.1:8000/. Chụp ảnh màn hình trình duyệt hiển thị kết quả. (Phải thấy rõ layout
+chung (header/footer) và phần nội dung (danh sách công việc) được nạp ở giữa).
+![alt text](phieu6/7_1.png)
+
+Câu hỏi Phản biện:
+
+# CHƯƠNG 8: ELOQUENT ORM
+
+A. Code đã hoàn thiện:
+
+1. Dán (paste) code hàm up() trong file Migration (...\_create_sinh_viens_table.php).
+2. Dán (paste) toàn bộ code file app/Models/SinhVien.php.
+3. Dán (paste) toàn bộ code file app/Http/Controllers/SinhVienController.php.
+4. Dán (paste) code 2 route trong routes/web.php.
+
+B. Ảnh chụp màn hình Kết quả (3 ẢNH):
+
+5. Ảnh 1 (Terminal): Chụp màn hình Terminal sau khi chạy php artisan make:model ... -m
+   VÀ php artisan migrate thành công.
+   ![alt text]()
+6. Ảnh 2 (phpMyAdmin): Chụp màn hình tab "Structure" (Cấu trúc) của bảng sinh_viens
+   trong CSDL, cho thấy rõ các cột id, ten_sinh_vien, email, created_at.
+   ![alt text]()
+7. Ảnh 3 (Trình duyệt Web): Chụp ảnh màn hình trang /sinhvien, sau khi đã dùng form
+   thêm 1-2 sinh viên (chứng minh ::create() và ::all() đều hoạt động).
+   ![alt text]()
+
+# CHƯƠNG 9: BẢO MẬT ỨNG DỤNG WEB
+
+A. Code đã hoàn thiện:
+
+1. Dán (paste) code của khối <form> trong tệp list.blade.php (chứng minh bạn đã thêm
+   @csrf).
+2. Dán (paste) code của khối @foreach trong tệp list.blade.php (chứng minh bạn dùng {{
+   }}).
+
+B. Ảnh chụp màn hình Kết quả (BẮT BUỘC 2 ẢNH):
+
+3. Ảnh 1 (Bằng chứng Chống CSRF): Tải trang /sinhvien, nhấn chuột phải $\rightarrow$
+   View Page Source (Xem nguồn trang). Chụp ảnh màn hình mã nguồn HTML, khoanh
+   tròn vào thẻ <input type="hidden" name="\_token" ...> mà @csrf đã tự động tạo ra.
+   ![alt text]()
+4. Ảnh 2 (Bằng chứng Chống XSS): Chụp ảnh màn hình trang /sinhvien sau khi bạn đã
+   thêm sinh viên ở (TODO 6 & 7). Ảnh phải cho thấy dòng chữ <script>alert('Ban da bi
+   XSS!');</script> được in ra dưới dạng text trên bảng, chứ KHÔNG CÓ popup "alert"
+   nào hiện lên.
+   ![alt text]()
+
+   Câu hỏi Phản biện:
